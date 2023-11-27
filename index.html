@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start/Stop UI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        button {
+            font-size: 16px;
+            padding: 10px;
+            margin: 5px;
+        }
+
+        #counter {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+
+        #monthcounterValue {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+
+        #response {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <button id="startBtn">Start</button>
+    <button id="stopBtn">Stop</button>
+    <div id="counter">Counter: <span id="counterValue">0</span></div>
+    <div id="monthcounterValue">-</div>
+    <div id="response">Stoped</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get elements
+            var startBtn = document.getElementById('startBtn');
+            var stopBtn = document.getElementById('stopBtn');
+            var counterValue = document.getElementById('counterValue');
+            var monthcounterValue = document.getElementById('monthcounterValue');
+            var responseDiv = document.getElementById('response');
+
+            // Counter variable
+            var counter = 0;
+
+            // Event listener for Start button
+            startBtn.addEventListener('click', function() {
+                responseDiv.innerHTML = 'Started';
+                // Make a POST request to /start
+                makeRequest('POST', '/start', function(response) {
+                    responseDiv.innerHTML = 'Start Response: ' + response;
+                });
+            });
+
+            // Event listener for Stop button
+            stopBtn.addEventListener('click', function() {
+                // Make a POST request to /stop
+                makeRequest('POST', '/stop', function(response) {
+                    responseDiv.innerHTML = 'Stop Response: ' + response;
+                });
+            });
+
+            // Make a GET request to /counter and update counter value
+            setInterval(function() {
+                makeRequest('GET', '/counter', function(response) {
+                    counterValue.innerHTML = response;
+                });
+            }, 1000);
+
+             // Make a GET request to /counter and update counter value
+             setInterval(function() {
+                makeRequest('GET', '/currentmonthcounter', function(response) {
+                    monthcounterValue.innerHTML = response;
+                });
+            }, 1000);
+
+            // Function to make AJAX requests
+            function makeRequest(method, url, callback) {
+                var xhr = new XMLHttpRequest();
+                xhr.open(method, url, true);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        callback(xhr.responseText);
+                    }
+                };
+                xhr.send();
+            }
+        });
+    </script>
+</body>
+</html>

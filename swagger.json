@@ -1,0 +1,93 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Shahkar service",
+    "description": "Service for checking mobile and national code."
+  },
+  "paths": {
+    "/start": {
+      "post": {
+        "summary": "Check mobile and national code",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "A message indicating the result of the check."
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "description": "An error message in case of a bad request."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/logs": {
+      "get": {
+        "summary": "get log",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": ""
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "description": "An error message in case of a bad request."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/counter": {
+      "get": {
+        "responses": {
+          
+        }
+      }
+    },
+    "/currentmonthcounter": {
+      "get": {
+        "responses": {
+          
+        }
+      }
+    },
+    "/stop": {
+      "post": {
+        "responses": {
+          
+        }
+      }
+    }
+  }
+  }
