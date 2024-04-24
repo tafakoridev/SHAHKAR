@@ -1,4 +1,4 @@
-# Shahkar API Repository
+# Shahkar API Repository ( Sitad )
 
 Welcome to the Shahkar API repository! This repository provides two API endpoints to facilitate user authentication and verification. Please find the details below on how to use these endpoints.
 
